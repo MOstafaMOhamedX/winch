@@ -5,13 +5,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use OwenIt\Auditing\Auditable as AuditableTrait;
-use OwenIt\Auditing\Contracts\Auditable;
-use Spatie\Permission\Traits\HasRoles;
 
-class Admin extends Authenticatable implements Auditable
+class Admin extends Authenticatable
 {
-    use HasApiTokens, Notifiable, HasRoles, SoftDeletes, AuditableTrait;
+    use HasApiTokens, Notifiable, SoftDeletes;
 
     protected $guarded = [];
 

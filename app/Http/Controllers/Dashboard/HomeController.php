@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\API\BaseController;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 
-class HomeController extends BaseController
+class HomeController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
 
     public function Login(Request $request)
     {

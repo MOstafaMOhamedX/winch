@@ -12,8 +12,6 @@ class RouteServiceProvider extends ServiceProvider
 {
     public const HOME = '/dashboard';
 
-    // protected $namespace = 'App\\Http\\Controllers';
-
     public function boot()
     {
         $this->configureRateLimiting();
