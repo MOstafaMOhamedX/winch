@@ -14,6 +14,7 @@ use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\RegionController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\SettingController;
+use App\Http\Middleware\Localization;
 use Illuminate\Support\Facades\Route;
 
 /*
