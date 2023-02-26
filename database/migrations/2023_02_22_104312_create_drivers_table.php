@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('lang')->default('en');
             $table->boolean('status')->default(1);
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('image')->nullable()->default('logo.png');
             $table->rememberToken();
             $table->softDeletes();

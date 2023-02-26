@@ -1,0 +1,73 @@
+@extends('dashboard.layout')
+@section('pagetitle',__('addresses'))
+@section('content')
+<form method="POST" action="{{ route('admin.client.addresses.update',['client'=>request()->client,'address'=> $Model]) }}">
+    @csrf
+    @method('PUT')
+    <div class="row">
+        <input type="hidden" name="client_id" value="{{$Model->client->id}}">
+
+        <div class="col-md-6 my-2">
+            <label for="">@lang('client')</label>
+            <input type="text" readonly value="{{$Model->client->name}}" class="form-control">
+        </div>
+        <div class="col-md-6 my-2">
+            <label for="region_id">@lang('region')</label>
+            <select name="region_id" class="form-control">
+                <option selected hidden>@lang('Select')</option>
+                @foreach($regions as $key => $item)
+                <option @if($item->id == $Model->region_id) selected @endif value="{{$item->id}}">
+                    {{$item->title()}}
+                </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-md-6 my-2">
+            <label for="lat">@lang('lat')</label>
+            <input id="lat" type="text" name="lat" placeholder="@lang('lat')" value="{{$Model->lat}}" class="form-control">
+        </div>
+        <div class="col-md-6 my-2">
+            <label for="long">@lang('long')</label>
+            <input id="long" type="text" name="long" placeholder="@lang('long')" value="{{$Model->long}}" class="form-control">
+        </div>
+        <div class="col-md-6 my-2">
+            <label for="block">@lang('block')</label>
+            <input id="block" type="text" name="block" placeholder="@lang('block')" value="{{$Model->block}}" class="form-control">
+        </div>
+        <div class="col-md-6 my-2">
+            <label for="road">@lang('road')</label>
+            <input id="road" type="text" name="road" placeholder="@lang('road')" value="{{$Model->road}}" class="form-control">
+        </div>
+        <div class="col-md-6 my-2">
+            <label for="building_no">@lang('Building')</label>
+            <input id="building_no" type="text" name="building_no" placeholder="@lang('Building')" value="{{$Model->building_no}}" class="form-control">
+        </div>
+        <div class="col-md-6 my-2">
+            <label for="floor_no">@lang('floorNo')</label>
+            <input id="floor_no" type="text" name="floor_no" placeholder="@lang('floorNo')" value="{{$Model->floor_no}}" class="form-control">
+        </div>
+        <div class="col-md-6 my-2">
+            <label for="apartment">@lang('apartment')</label>
+            <input id="apartment" type="text" name="apartment" placeholder="@lang('apartment')" value="{{$Model->apartment}}" class="form-control">
+        </div>
+        <div class="col-md-6 my-2">
+            <label for="type">@lang('type')</label>
+            <select name="type" class="form-control">
+                <option selected hidden>@lang('Select')</option>
+                <option @if($Model->type == 'flat') selected @endif value="flat">@lang('flat')</option>
+                <option @if($Model->type == 'office') selected @endif value="office">@lang('office')</option>
+            </select>
+        </div>
+        <div class="col-md-6 my-2">
+            <label for="note">@lang('note')</label>
+            <textarea id="note" type="text" name="note" value="{{$Model->note}}" placeholder="@lang('note')" class="form-control mceNoEditor"></textarea>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="form-group col-12 m-b-0 text-center mx-auto mt-2">
+            <button class="btn btn-primary waves-effect waves-light" type="submit">@lang('update')</button>
+            <button type="reset" class="btn btn-default waves-effect waves-light m-l-5">@lang('cancel')</button>
+        </div>
+    </div>
+</form>
+@endsection

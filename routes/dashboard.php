@@ -1,7 +1,19 @@
 <?php
 
+use App\Http\Controllers\Dashboard\AddressController;
+use App\Http\Controllers\Dashboard\AdminsController;
+use App\Http\Controllers\Dashboard\ClientsController;
+use App\Http\Controllers\Dashboard\ContactController;
+use App\Http\Controllers\Dashboard\CountryController;
+use App\Http\Controllers\Dashboard\CouponController;
+use App\Http\Controllers\Dashboard\DriversController;
+use App\Http\Controllers\Dashboard\FAQController;
 use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Dashboard\PermissionController;
 use App\Http\Controllers\Dashboard\ProfileController;
+use App\Http\Controllers\Dashboard\RegionController;
+use App\Http\Controllers\Dashboard\RoleController;
+use App\Http\Controllers\Dashboard\SettingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,15 +28,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'dashboard', 'as' => 'admin.'], function () {
-      Route::any('/', [HomeController::class, 'home'])->name('home');
-      Route::resources([
+    Route::any('/', [HomeController::class, 'home'])->name('home');
+    Route::resources([
         'profile' => ProfileController::class,
         'admins' => AdminsController::class,
-        'clients' => AdminsController::class,
-        'drivers' => AdminsController::class,
+        'drivers' => DriversController::class,
+        'clients' => ClientsController::class,
+        'client.addresses' => AddressController::class,
+        'type.settings' => SettingController::class,
+        'countries' => CountryController::class,
+        'country.regions' => RegionController::class,
+        'roles' => RoleController::class,
+        'permissions' => PermissionController::class,
+        'contacts' => ContactController::class,
+        'coupons' => CouponController::class,
+        'faq' => FAQController::class,
 
     ]);
 });
-
-
-

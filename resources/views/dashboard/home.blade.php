@@ -1,5 +1,5 @@
 @extends('dashboard.layout')
 
 @section('content')
-Hi
+Hi From Dashboard
 @endsection

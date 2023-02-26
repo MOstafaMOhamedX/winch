@@ -84,8 +84,6 @@ return [
 
     'locale' => 'en',
     'locales' => ['ar', 'en'],
-    'available_locales' => ['ar', 'en'],
-
     'currency' => 'BHD',
 
     /*
@@ -199,6 +197,14 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Intervention\Image\ImageServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Shetabit\Visitor\Provider\VisitorServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+        Stevebauman\Location\LocationServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
+
     ],
 
     /*
@@ -213,7 +219,11 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Visitor' => Shetabit\Visitor\Facade\Visitor::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     ])->toArray(),
 
 ];

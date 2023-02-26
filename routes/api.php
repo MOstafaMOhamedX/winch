@@ -1,24 +1,17 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\{
-    AuthController,
-    SettingController,
-    HomeController
-};
-
-
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\driver\{
     AuthController as AuthDriverController,
 };
-
-
+use App\Http\Controllers\API\HomeController;
+use App\Http\Controllers\API\SettingController;
+use Illuminate\Support\Facades\Route;
 
 //client
 Route::prefix('/{lang}')->group(function () {
-
-    Route::GET('/', [AuthController::class,'lang'])->name('lang');
-    Route::GET('/home', [HomeController::class,'index'])->name('APIHome');
+    Route::GET('/', [AuthController::class, 'lang'])->name('lang');
+    Route::GET('/home', [HomeController::class, 'index'])->name('APIHome');
 
     Route::GET('contact ', [SettingController::class, 'contact']);
     Route::GET('privacy', [SettingController::class, 'privacy']);
@@ -36,11 +29,8 @@ Route::prefix('/{lang}')->group(function () {
     Route::POST('tokens', [AuthController::class, 'DeviceToken']);
 });
 
-
-
 //driver
 Route::prefix('/{lang}/driver')->group(function () {
-
     Route::POST('login', [AuthDriverController::class, 'Login']);
     Route::POST('register', [AuthDriverController::class, 'Register']);
     Route::POST('profile', [AuthDriverController::class, 'UpdateProfile']);

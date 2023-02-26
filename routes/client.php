@@ -15,8 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['as' => 'client.'], function () {
-      Route::any('/', [HomeController::class, 'home'])->name('home');
+    Route::any('/', [HomeController::class, 'home'])->name('home');
 });
-
-
-

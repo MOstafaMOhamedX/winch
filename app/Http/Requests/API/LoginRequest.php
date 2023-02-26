@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\API;
 
-use App\Http\Requests\API\BaseRequest;
-
 class LoginRequest extends BaseRequest
 {
     public function rules()
@@ -11,7 +9,7 @@ class LoginRequest extends BaseRequest
         return [
             'phone' => ['required'],
             'password' => ['required'],
-            'device_token'    =>  ['nullable'],
+            'device_token' => ['nullable'],
         ];
     }
 }

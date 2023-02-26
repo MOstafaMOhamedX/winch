@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
@@ -24,7 +23,6 @@ class AuthController extends Controller
 
     public function Logout()
     {
-
+        auth('admin')->Logout();
     }
-
 }

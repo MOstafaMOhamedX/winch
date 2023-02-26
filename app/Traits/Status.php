@@ -6,10 +6,11 @@ trait Status
 {
     public function scopeActive($query)
     {
-        return $query->where('status',1);
+        return $query->where('status', 1);
     }
+
     public function scopeDisActive($query)
     {
-        return $query->where('status',0);
+        return $query->where('status', 0);
     }
 }

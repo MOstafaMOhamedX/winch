@@ -12,44 +12,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/lineicons.css') }}" />
     <link href='https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap' rel="stylesheet">
-
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
-
     @yield('css')
     @if (lang('ar'))
         <link href="{{ asset('css/ar.css') }}" rel="stylesheet">
     @else
         <link href="{{ asset('css/en.css') }}" rel="stylesheet">
     @endif
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
 
 </head>
 
 <body >
-    <aside class="sidebar-nav-wrapper active">
-        <div class="navbar-logo">
-            <a href="{{ route('admin.home') }}">
-                <img src="{{ asset(setting('logo')) }}" alt="logo" style="height: 100px" />
-            </a>
-        </div>
-        <nav class="sidebar-nav">
-            <ul>
-                <li class="nav-item @if(str_contains(Route::currentRouteName(), 'admins')) active @endif">
-                    <a class="collapsed" href="#0" class="" data-bs-toggle="collapse" data-bs-target="#admins" aria-controls="admins" aria-expanded="true" aria-label="Toggle navigation">
-                        <span class="icon text-center">
-                            <i style="width: 20px;" class="fa-solid fa-users-between-lines mx-2"></i>
-                        </span>
-                        <span class="text">{{ __('admins') }}</span>
-                    </a>
-                    <ul id="admins" class="dropdown-nav mx-4 collapse" style="">
-                        <li><a href="">{{ __('viewAll') }}</a></li>
-                        <li><a href="">{{ __('add') }}</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-    </aside>
+    @include('dashboard.components.sidebar')
     <div class="overlay"></div>
 
     <main class="main-wrapper active">
@@ -131,9 +107,131 @@
     </main>
 
 
-
     <script src="{{ asset('js/dashboard.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+
+    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+
+    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <script>
+        function DeleteSelected(table,id = 0) {
+            event.preventDefault();
+            var ids = [];
+            if(id > 0)
+                ids.push(id);
+            else{
+                $('input:checkbox[class="DTcheckbox"]:checked').each(function() {
+                    ids.push($(this).attr('value'));
+                });
+            }
+            swal({title: "@lang('delete')", text: "@lang('deletewarning')", icon: "warning", buttons: true, dangerMode: true}).then((willchagestatus) => {
+                if (willchagestatus) {
+                    $.ajax({
+                        type: "POST"
+                        , url: "{{ route('RemoveIds') }}"
+                        , data: {
+                            _token: "{{ csrf_token() }}"
+                            , ids: ids
+                            , table: table
+                        , }
+                        , dataType: 'text'
+                        , cache: false
+                        , success: function(result) {
+                            if (result){
+                                swal({title: "😀❤️ " + "{{ __('DeletedSuccessfully') }}", icon: "success", buttons: true, dangerMode: true});
+                                location.reload();
+                            }
+                            else
+                                swal({title: "Coudn't delete!", icon: "error", buttons: true, dangerMode: true});
+                        }
+                        , error: function(xhr, status, errorThrown) {
+                            swal({title: "{{ __('sorry_there_was_an_error') }}", icon: "warning", buttons: true, dangerMode: true});
+                        }
+                    });
+                }
+            });
+        }
+        function toggleswitch(id,table , column_name = 'status',checkbox = 'checkbox') {
+            event.preventDefault();
+            swal({text: "@lang('changeStatus')", title: "@lang('display')", icon: "warning", buttons: true, dangerMode: true}).then((willchagestatus) => {
+                if (willchagestatus) {
+                    $.ajax({
+                        type: "POST"
+                        , url: "{{ route('switch') }}"
+                        , data: {
+                            _token: "{{ csrf_token() }}"
+                            , id: id
+                            , column_name: column_name
+                            , table: table
+                        , }
+                        , dataType: 'text'
+                        , cache: false
+                        , success: function(checked) {
+                            swal({title: "😀❤️ {{ __('updatedSuccessfully') }}", icon: "success", buttons: true, dangerMode: true});
+                            checked = JSON.parse(checked);
+                            $('#' + checkbox + id).prop('checked', checked == 1);
+                        }
+                        , error: function(xhr, status, errorThrown) {
+                            swal({title: "{{ __('sorry_there_was_an_error') }}", icon: "warning", buttons: true, dangerMode: true});
+                        }
+                    });
+                }
+            });
+        }
+        $(function() {
+            var table = $('.DataTable').DataTable({
+                oLanguage: {
+                    sUrl: '{{ DT_Lang() }}'
+                },
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]]
+                , dom: 'Blfrtip'
+                , buttons: [
+                    {
+                        extend: 'copy',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'csv',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            stripHtml : false,
+                            columns: ':visible'
+                        }
+                    },
+                    'colvis'
+                ]
+            });
+
+        });
+    </script>
     @yield('js')
 </body>
 </html>

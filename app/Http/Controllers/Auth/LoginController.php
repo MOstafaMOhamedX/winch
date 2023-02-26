@@ -37,9 +37,8 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        if (auth('admin')->attempt($credentials, request('remember'))){
-             return redirect()->route('admin.home');
+        if (auth('admin')->attempt($credentials, request('remember'))) {
+            return redirect()->route('admin.home');
         }
-
     }
 }
