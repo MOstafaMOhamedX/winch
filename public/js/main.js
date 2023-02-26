@@ -48,61 +48,6 @@ $(document).on("click", ".show_confirm", function () {
     });
 });
 
-$(document).on("click", ".toggle-theme", function () {
-    tinymce.remove();
-    $("body").toggleClass("darkTheme");
-    $(".toggle-theme").toggleClass("fa-toggle-on fa-toggle-off");
-    if ($("body").hasClass("darkTheme")) {
-        $("#darkTheme").attr("href", window.location.origin + "/css/dark.css");
-        tinymce.init({
-            selector: "textarea",
-            plugins: "advlist autolink lists link image charmap preview anchor pagebreak",
-            toolbar_mode: "floating",
-            toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
-            skin: "oxide-dark",
-            content_css: "dark",
-        });
-    } else {
-        $("#darkTheme").attr("href", "");
-        tinymce.init({
-            selector: "textarea",
-            plugins: "advlist autolink lists link image charmap preview anchor pagebreak",
-            toolbar_mode: "floating",
-            toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
-        });
-    }
-    $.ajax({
-        method: "POST",
-        url: "/switchTheme",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf_token"]').attr("content"),
-        },
-    });
-    $('.select2').select2();
-});
-
-$(document).ready(function () {
-    if ($("meta[name='user-theme']").attr("content") == 0) {
-        tinymce.init({
-            // selector: "textarea",
-            selector : "textarea:not(.mceNoEditor)",
-            plugins: "advlist autolink lists link image charmap preview anchor pagebreak",
-            toolbar_mode: "floating",
-            toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
-            skin: "oxide-dark",
-            content_css: "dark",
-        });
-    } else {
-        tinymce.init({
-            // selector: "textarea",
-            selector : "textarea:not(.mceNoEditor)",
-            plugins: "advlist autolink lists link image charmap preview anchor pagebreak",
-            toolbar_mode: "floating",
-            toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
-        });
-    }
-});
-
 
 $(document).on("click", "#ToggleSelectAll", function () {
     if( $('#ToggleSelectAll').is(':checked')){

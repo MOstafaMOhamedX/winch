@@ -31,9 +31,9 @@ class AuthController extends BaseController
             }
             $success['token'] = $Driver->createToken('ClientToken')->plainTextToken;
             $success['user'] = DriverResource::make($Driver);
-            return ResponseHelper::make($success, __('messages.loginSuccessfully'));
+            return ResponseHelper::make($success, __('loginSuccessfully'));
         } else {
-            return ResponseHelper::make(NULL, __('messages.emailPasswordIncorrect'), false, 404);
+            return ResponseHelper::make(NULL, __('emailPasswordIncorrect'), false, 404);
         }
     }
 
@@ -60,7 +60,7 @@ class AuthController extends BaseController
         }
         $success['token'] = $driver->createToken('ClientToken')->plainTextToken;
         $success['user'] = DriverResource::make($driver);
-        return ResponseHelper::make($success, __('messages.User successfully Added'));
+        return ResponseHelper::make($success, __('User successfully Added'));
     }
 
     public function DeviceToken(DeviceTokenRequest $request)
@@ -73,7 +73,7 @@ class AuthController extends BaseController
         }
         $success['token'] = $this->user->createToken('ClientToken')->plainTextToken;
         $success['user'] = DriverResource::make($this->user);
-        return ResponseHelper::make($success, __('messages.addedSuccessfully'));
+        return ResponseHelper::make($success, __('addedSuccessfully'));
     }
 
 
@@ -88,7 +88,7 @@ class AuthController extends BaseController
 
         $success['token'] = $this->user->createToken('ClientToken')->plainTextToken;
         $success['user'] = DriverResource::make($this->user->refresh());
-        return ResponseHelper::make($success, __('messages.User successfully Added'));
+        return ResponseHelper::make($success, __('User successfully Added'));
 
     }
 
@@ -111,7 +111,7 @@ class AuthController extends BaseController
         $this->CheckAuth();
         $this->user->DriverDeviceTokens()->where('device_token', request()->device_token)->delete();
         $this->user->tokens()->where('token', request()->bearerToken())->delete();
-        return ResponseHelper::make(null, __('messages.logoutSuccessfully'));
+        return ResponseHelper::make(null, __('logoutSuccessfully'));
     }
 
     public function lang($lang)
@@ -119,7 +119,7 @@ class AuthController extends BaseController
         $this->CheckAuth();
         $this->user->lang = $lang;
         $this->user->save();
-        return ResponseHelper::make(null, __('messages.User successfully Added'));
+        return ResponseHelper::make(null, __('User successfully Added'));
     }
 
 
@@ -129,6 +129,6 @@ class AuthController extends BaseController
         $this->user->DriverDeviceTokens()->where('device_token', request()->device_token)->delete();
         $this->user->tokens()->delete();
         $this->user->delete();
-        return ResponseHelper::make(null, __('messages.DeletedSuccessfully'));
+        return ResponseHelper::make(null, __('DeletedSuccessfully'));
     }
 }

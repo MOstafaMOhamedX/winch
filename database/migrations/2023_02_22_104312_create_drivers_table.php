@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('drivers', function (Blueprint $table) {
@@ -16,19 +13,16 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
-            $table->string('image')->nullable()->default('logo.png');
             $table->string('lang')->default('en');
             $table->boolean('status')->default(1);
             $table->string('password');
+            $table->string('image')->nullable()->default('logo.png');
             $table->rememberToken();
             $table->softDeletes();
-            $table->timestamps();            
+            $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('drivers');

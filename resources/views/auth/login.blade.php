@@ -8,7 +8,7 @@
 
     <link rel="shortcut icon" href="{{ asset('login_assets/assets_' .lang() . '/images/favicon_1.ico') }}">
 
-    <title>@lang('dashboard.dashboardTitle')</title>
+    <title>@lang('dashboardTitle')</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Changa:wght@400;700&display=swap" rel="stylesheet">
@@ -46,7 +46,7 @@
     <div class="wrapper-page">
         <div class=" card-box">
             <div class="panel-heading">
-                <h3 class="text-center"> @lang('messages.Login') <strong class="text-custom">@lang('messages.management')</strong> </h3>
+                <h3 class="text-center"> @lang('Login') <strong class="text-custom">@lang('management')</strong> </h3>
             </div>
             <div class="panel-body">
                 @if (session()->has('success'))
@@ -63,13 +63,13 @@
                     @csrf
                     <div class="form-group ">
                         <div class="col-xs-12">
-                            <input class="form-control" type="text" name="email" required placeholder="@lang('messages.email')">
+                            <input class="form-control" type="text" name="email" required placeholder="@lang('email')">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input class="form-control" type="password" name="password" required placeholder="@lang('messages.Password')">
+                            <input class="form-control" type="password" name="password" required placeholder="@lang('Password')">
                         </div>
                     </div>
 
@@ -78,7 +78,7 @@
                             <div class="checkbox checkbox-primary">
                                 <input id="checkbox-signup" name="remember" type="checkbox">
                                 <label for="checkbox-signup">
-                                    @lang('messages.remember')
+                                    @lang('remember')
                                 </label>
                             </div>
 
@@ -87,7 +87,7 @@
 
                     <div class="form-group text-center m-t-40">
                         <div class="col-xs-12">
-                            <button class="btn btn-pink btn-block text-uppercase waves-effect waves-light" type="submit" name="submit">@lang('messages.login')</button>
+                            <button class="btn btn-pink btn-block text-uppercase waves-effect waves-light" type="submit" name="submit">@lang('login')</button>
                         </div>
                     </div>
                     <div class="form-group m-t-30 m-b-0">
@@ -107,7 +107,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-6">
-                    @lang('messages.emcancopyright') <a href="https://emcan-group.com/" target="_blank" style="text-decoration: none; color:black;"> Emcan </a>
+                    @lang('emcancopyright') <a href="https://emcan-group.com/" target="_blank" style="text-decoration: none; color:black;"> Emcan </a>
                 </div>
 
             </div>

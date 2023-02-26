@@ -2,9 +2,10 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdminsTable extends Migration
+return new class extends Migration
 {
     public function up()
     {
@@ -21,10 +22,17 @@ class CreateAdminsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+
+        \App\Models\Admin::create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'phone' => '123456',
+            'password' => Hash::make('123456'),
+        ]);
     }
 
     public function down()
     {
         Schema::dropIfExists('admins');
     }
-}
+};

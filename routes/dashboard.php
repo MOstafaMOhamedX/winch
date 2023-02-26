@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Dashboard\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +16,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'dashboard', 'as' => 'admin.'], function () {
-    Route::get('/', function () {
-        return view('dashboard.home');
-      })->name('home');
+      Route::any('/', [HomeController::class, 'home'])->name('home');
+      Route::resources([
+        'profile' => ProfileController::class,
+        'admins' => AdminsController::class,
+        'clients' => AdminsController::class,
+        'drivers' => AdminsController::class,
+
+    ]);
 });
 
 

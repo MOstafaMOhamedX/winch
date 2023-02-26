@@ -15,7 +15,6 @@ use App\Http\Controllers\API\driver\{
 
 
 //client
-
 Route::prefix('/{lang}')->group(function () {
 
     Route::GET('/', [AuthController::class,'lang'])->name('lang');
@@ -38,9 +37,8 @@ Route::prefix('/{lang}')->group(function () {
 });
 
 
+
 //driver
-
-
 Route::prefix('/{lang}/driver')->group(function () {
 
     Route::POST('login', [AuthDriverController::class, 'Login']);

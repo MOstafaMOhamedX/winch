@@ -19,7 +19,7 @@ class BaseController extends Controller
     public function CheckAuth()
     {
         if(!auth('sanctum')->check())
-            return ResponseHelper::make((object)[], __('messages.You not auth'), true, 404);
+            return ResponseHelper::make((object)[], __('You not auth'), true, 404);
         else
             $this->user = auth('sanctum')->user();
     }
@@ -27,14 +27,14 @@ class BaseController extends Controller
     {
         if(in_array(Route::currentRouteName(), ['addresses.index'])){
             if ($Data->count() < 1)
-                return ResponseHelper::make([], __('messages.Data not found'), true, 404);
+                return ResponseHelper::make([], __('Data not found'), true, 404);
         }
         if ($Data->count() < 1)
-            return ResponseHelper::make((object)[], __('messages.Data not found'), true, 404);
+            return ResponseHelper::make((object)[], __('Data not found'), true, 404);
     }
     public function CheckExist($Model)
     {
         if (!$Model)
-            return ResponseHelper::make((object)[], __('messages.Data not found'), true, 404);
+            return ResponseHelper::make((object)[], __('Data not found'), true, 404);
     }
 }

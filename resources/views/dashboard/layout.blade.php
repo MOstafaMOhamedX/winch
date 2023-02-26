@@ -40,11 +40,11 @@
                         <span class="icon text-center">
                             <i style="width: 20px;" class="fa-solid fa-users-between-lines mx-2"></i>
                         </span>
-                        <span class="text">{{ __('messages.admins') }}</span>
+                        <span class="text">{{ __('admins') }}</span>
                     </a>
                     <ul id="admins" class="dropdown-nav mx-4 collapse" style="">
-                        <li><a href="">{{ __('messages.viewAll') }}</a></li>
-                        <li><a href="">{{ __('messages.add') }}</a></li>
+                        <li><a href="">{{ __('viewAll') }}</a></li>
+                        <li><a href="">{{ __('add') }}</a></li>
                     </ul>
                 </li>
             </ul>
@@ -78,12 +78,12 @@
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
                                     <li>
-                                        <a href="{{ route('admin.profile.show') }}"> <i class="lni lni-user"></i> {{ __('website.myProfile') }}</a>
+                                        <a href="{{ route('admin.profile.show',auth()->id()) }}"> <i class="lni lni-user"></i> {{ __('myProfile') }}</a>
                                     </li>
                                     <li>
                                         <form method="POST" action="{{ route('admin.logout') }}">
                                             @csrf
-                                            <a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); this.closest('form').submit();"> <i class="lni lni-exit"></i> {{ __('website.logout') }}</a>
+                                            <a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); this.closest('form').submit();"> <i class="lni lni-exit"></i> {{ __('logout') }}</a>
                                         </form>
                                     </li>
                                 </ul>
@@ -118,9 +118,9 @@
                     <div class="col-md-6 order-last order-md-first">
                         <div class="copyright text-md-start">
                             <p class="text-sm">
-                                @lang('messages.copyrights')
+                                @lang('copyrights')
                                 <a href="https://emcan-group.com/" rel="nofollow" target="_blank">
-                                    {{ __('messages.emcan') }}
+                                    {{ __('emcan') }}
                                 </a>
                             </p>
                         </div>
